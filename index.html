@@ -13,6 +13,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="utill.css">
     <style></style>
   </head>
   <body>
@@ -90,15 +91,15 @@
             </p>
             <div class="stats">
               <div class="stat-item">
-                <div class="stat-number">40+</div>
+                <div class="stat-number" data-target="40">40+</div>
                 <div class="stat-text">Years of Experience</div>
               </div>
               <div class="stat-item">
-                <div class="stat-number">500+</div>
+                <div class="stat-number" data-target="500">500+</div>
                 <div class="stat-text">Clients Served</div>
               </div>
               <div class="stat-item">
-                <div class="stat-number">1000+</div>
+                <div class="stat-number" data-target="1000">1000+</div>
                 <div class="stat-text">Products Available</div>
               </div>
             </div>
@@ -118,7 +119,9 @@
       <div class="container">
         <h2 class="section-title">Our Services</h2>
         <div class="services-grid">
-          <div class="service-card">
+
+
+          <div class="service-card fade-in">
             <div class="service-icon">
               <i class="fas fa-exchange-alt"></i>
             </div>
@@ -129,7 +132,8 @@
               requirements.
             </p>
           </div>
-          <div class="service-card">
+
+          <div class="service-card fade-in">
             <div class="service-icon">
               <i class="fas fa-truck"></i>
             </div>
@@ -139,7 +143,7 @@
               factories, workshops, and businesses across Saudi Arabia.
             </p>
           </div>
-          <div class="service-card">
+          <div class="service-card fade-in">
             <div class="service-icon">
               <i class="fas fa-search"></i>
             </div>
@@ -149,7 +153,7 @@
               specific applications, even for hard-to-find components.
             </p>
           </div>
-          <div class="service-card">
+          <div class="service-card fade-in">
             <div class="service-icon">
               <i class="fas fa-handshake"></i>
             </div>
@@ -159,7 +163,7 @@
               businesses with regular industrial part requirements.
             </p>
           </div>
-          <div class="service-card">
+          <div class="service-card fade-in">
   <div class="service-icon">
     <i class="fas fa-cogs"></i>
   </div>
@@ -170,7 +174,7 @@
   </p>
 </div>
 
-<div class="service-card">
+<div class="service-card fade-in">
   <div class="service-icon">
     <i class="fas fa-industry"></i>
   </div>
@@ -184,7 +188,7 @@
       </div>
     </section>
 
-    <!-- Products Section -->
+
     <!-- Products Section -->
 <section id="products" class="products">
   <div class="container">
@@ -192,7 +196,7 @@
     <div class="products-grid">
 
       <!-- Product 1 -->
-      <div class="product-card">
+      <div class="product-card fade-in">
         <div class="product-image">
           <img src="./assets/products/pro1.jpg" alt="Industrial couplings and spiders">
         </div>
@@ -203,7 +207,7 @@
       </div>
 
       <!-- Product 2 -->
-      <div class="product-card">
+      <div class="product-card fade-in">
         <div class="product-image">
           <img src="./assets/products/pro2.jpg" alt="Industrial mechanical seals">
         </div>
@@ -214,7 +218,7 @@
       </div>
 
       <!-- Product 3 -->
-      <div class="product-card">
+      <div class="product-card fade-in">
         <div class="product-image">
           <img src="./assets/products/pro3.jpg" alt="Gaskets and packing solutions">
         </div>
@@ -225,7 +229,7 @@
       </div>
 
       <!-- Product 4 -->
-      <div class="product-card">
+      <div class="product-card fade-in">
         <div class="product-image">
           <img src="./assets/products/pro4.jpg" alt="Bearings and transmission components">
         </div>
@@ -236,7 +240,7 @@
       </div>
 
       <!-- Product 5 -->
-      <div class="product-card">
+      <div class="product-card fade-in">
         <div class="product-image">
           <img src="./assets/products/pro5.jpg" alt="Stainless steel and teflon products">
         </div>
@@ -247,7 +251,7 @@
       </div>
 
       <!-- Product 6 -->
-      <div class="product-card">
+      <div class="product-card fade-in">
         <div class="product-image">
           <img src="./assets/products/pro6.jpg" alt="Industrial and safety supplies">
         </div>
@@ -266,7 +270,7 @@
     <section id="contact" class="contact">
       <div class="container">
         <h2 class="section-title">Contact Us</h2>
-        <div class="contact-container">
+        <div class="contact-container fade-in">
           <div class="contact-info">
             <h3>Get In Touch</h3>
             <p>
@@ -413,79 +417,120 @@
     </footer>
 
     <script>
-      // Navigation toggle
-      const hamburger = document.querySelector(".hamburger");
-      const navMenu = document.querySelector(".nav-menu");
+// Navigation toggle
+const hamburger = document.querySelector(".hamburger");
+const navMenu = document.querySelector(".nav-menu");
 
-      hamburger.addEventListener("click", () => {
-        hamburger.classList.toggle("active");
-        navMenu.classList.toggle("active");
+hamburger.addEventListener("click", () => {
+  hamburger.classList.toggle("active");
+  navMenu.classList.toggle("active");
+});
+
+document.querySelectorAll(".nav-link").forEach((link) => {
+  link.addEventListener("click", () => {
+    hamburger.classList.remove("active");
+    navMenu.classList.remove("active");
+  });
+});
+
+// Navbar scroll effect
+window.addEventListener("scroll", () => {
+  const navbar = document.querySelector(".navbar");
+  if (window.scrollY > 50) {
+    navbar.classList.add("scrolled");
+  } else {
+    navbar.classList.remove("scrolled");
+  }
+});
+
+// Smooth scrolling for navigation links
+document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+  anchor.addEventListener("click", function (e) {
+    e.preventDefault();
+
+    const targetId = this.getAttribute("href");
+    if (targetId === "#") return;
+
+    const targetElement = document.querySelector(targetId);
+    if (targetElement) {
+      window.scrollTo({
+        top: targetElement.offsetTop - 80,
+        behavior: "smooth",
       });
+    }
+  });
+});
 
-      document.querySelectorAll(".nav-link").forEach((link) => {
-        link.addEventListener("click", () => {
-          hamburger.classList.remove("active");
-          navMenu.classList.remove("active");
-        });
-      });
+// Scroll animations for elements with fade-in or zoom-in
+const animateOnScroll = (selector) => {
+  const elements = document.querySelectorAll(selector);
 
-      // Navbar scroll effect
-      window.addEventListener("scroll", () => {
-        const navbar = document.querySelector(".navbar");
-        if (window.scrollY > 50) {
-          navbar.classList.add("scrolled");
-        } else {
-          navbar.classList.remove("scrolled");
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target); // stop observing after animation
         }
       });
+    },
+    { threshold: 0.1 }
+  );
 
-      // Smooth scrolling for navigation links
-      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-        anchor.addEventListener("click", function (e) {
-          e.preventDefault();
+  elements.forEach((el, index) => {
+    // Optional: stagger animation for multiple elements
+    el.style.transitionDelay = `${index * 0.15}s`;
+    observer.observe(el);
+  });
+};
 
-          const targetId = this.getAttribute("href");
-          if (targetId === "#") return;
+// Apply animations to desired elements
+animateOnScroll(".service-card");
+animateOnScroll(".product-card");
+animateOnScroll(".contact-container");
 
-          const targetElement = document.querySelector(targetId);
-          if (targetElement) {
-            window.scrollTo({
-              top: targetElement.offsetTop - 80,
-              behavior: "smooth",
-            });
+// Contact form submission
+const contactForm = document.getElementById("contactForm");
+if (contactForm) {
+  contactForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    alert("Thank you for your message! We will get back to you soon.");
+    this.reset();
+  });
+}
+
+// Animate stats numbers on scroll with + sign
+const stats = document.querySelectorAll(".stat-number");
+
+const statsObserver = new IntersectionObserver(
+  (entries, observer) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const target = +el.getAttribute("data-target");
+        let count = 0;
+        const duration = 2000; // animation duration in ms
+        const stepTime = Math.floor(duration / target);
+
+        const counter = setInterval(() => {
+          count++;
+          el.textContent = count + "+"; // always add +
+          if (count >= target) {
+            clearInterval(counter);
+            el.textContent = target + "+"; // ensure final number shows +
           }
-        });
-      });
+        }, stepTime);
 
-      // Scroll animation for elements
-      const fadeElements = document.querySelectorAll(".fade-in");
-
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("visible");
-            }
-          });
-        },
-        {
-          threshold: 0.1,
-        }
-      );
-
-      fadeElements.forEach((element) => {
-        observer.observe(element);
-      });
-
-      // Form submission
-      const contactForm = document.getElementById("contactForm");
-      if (contactForm) {
-        contactForm.addEventListener("submit", function (e) {
-          e.preventDefault();
-          alert("Thank you for your message! We will get back to you soon.");
-          this.reset();
-        });
+        observer.unobserve(el); // stop observing after animation
       }
+    });
+  },
+  { threshold: 0.5 } // trigger when half visible
+);
+
+stats.forEach((stat) => statsObserver.observe(stat));
+
+
     </script>
   </body>
 </html>
